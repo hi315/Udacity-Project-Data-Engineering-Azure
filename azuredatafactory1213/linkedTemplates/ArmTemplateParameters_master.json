@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "azuredatafactory1213"
+		},
+		"linked_service_AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"linked_service_AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"linked_service_AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://datalakegen2storageacct.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
