@@ -13,6 +13,65 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/load_Agency_file_into_Synapse')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "dataset_AgencyMaster",
+								"type": "DatasetReference"
+							},
+							"name": "agencydatalake"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "dataset_NYC_Payroll_AGENCY_MD",
+								"type": "DatasetReference"
+							},
+							"name": "agencySynapse",
+							"rejectedDataLinkedService": {
+								"referenceName": "linked_service_AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          AgencyID as string,",
+						"          AgencyName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> agencydatalake",
+						"agencydatalake sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     staged: true,",
+						"     allowCopyCommand: true,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          AgencyID,",
+						"          AgencyName",
+						"     )) ~> agencySynapse"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/load_Agency_into_SQL')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -615,7 +674,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/load_Employee_into_Synapse')]",
-				"[concat(variables('factoryId'), '/dataflows/load_Title_file_into_Synapse')]"
+				"[concat(variables('factoryId'), '/dataflows/load_Title_file_into_Synapse')]",
+				"[concat(variables('factoryId'), '/dataflows/load_Agency_file_into_Synapse')]"
 			]
 		}
 	]
