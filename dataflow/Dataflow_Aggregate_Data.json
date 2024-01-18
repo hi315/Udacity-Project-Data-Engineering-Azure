@@ -25,10 +25,10 @@
 					"name": "unionHistoricalFilesSQL"
 				},
 				{
-					"name": "filter1"
+					"name": "filterFiscalYear"
 				},
 				{
-					"name": "TotalPaid"
+					"name": "AddTotalPaidColumn"
 				}
 			],
 			"scriptLines": [
@@ -85,8 +85,8 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> AzureDataLakeHistoryFolder",
 				"AzureDataLakeHistoryFolder, SqldbNycPayrollDataTable union(byName: true)~> unionHistoricalFilesSQL",
-				"unionHistoricalFilesSQL filter(toInteger(FiscalYear) >= $Fiscal_Year) ~> filter1",
-				"filter1 derive(TotalPaid = RegularGrossPaid + TotalOTPaid + TotalOtherPay) ~> TotalPaid"
+				"unionHistoricalFilesSQL filter(toInteger(FiscalYear) >= $Fiscal_Year) ~> filterFiscalYear",
+				"filterFiscalYear derive(TotalPaid = RegularGrossPaid + TotalOTPaid + TotalOtherPay) ~> AddTotalPaidColumn"
 			]
 		}
 	}
