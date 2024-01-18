@@ -1,0 +1,12 @@
+{
+	"name": "sdatafactory63",
+	"properties": {
+		"globalParameters": {
+			"Global_FiscalYear": {
+				"type": "int",
+				"value": 2021
+			}
+		}
+	},
+	"location": "eastus"
+}
