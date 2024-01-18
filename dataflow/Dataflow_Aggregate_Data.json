@@ -119,7 +119,8 @@
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          FiscalYear,",
-				"          AgencyName",
+				"          AgencyName,",
+				"          TotalPaid = SumTotalPaid",
 				"     )) ~> SQLPayrollSummaryTable"
 			]
 		}
