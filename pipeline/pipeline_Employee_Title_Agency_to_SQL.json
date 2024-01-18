@@ -36,39 +36,6 @@
 				}
 			},
 			{
-				"name": "Data flow Load Agency MD",
-				"type": "ExecuteDataFlow",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "load_Agency_file_into_Synapse",
-						"type": "DataFlowReference"
-					},
-					"staging": {
-						"linkedService": {
-							"referenceName": "linked_service_AzureDataLakeStorage1",
-							"type": "LinkedServiceReference"
-						},
-						"folderPath": "dirstaging"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "Data flow Load Emp MD",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
@@ -83,6 +50,30 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "load_Employee_into_SQL",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Data flow Load Agency MD",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "load_Agency_into_SQL",
 						"type": "DataFlowReference"
 					},
 					"compute": {
