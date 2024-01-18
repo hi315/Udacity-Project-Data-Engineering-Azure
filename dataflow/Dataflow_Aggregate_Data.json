@@ -30,7 +30,7 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     Fiscal_Year as string",
+				"     Fiscal_Year as integer",
 				"}",
 				"source(output(",
 				"          FiscalYear as string,",
@@ -82,7 +82,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> AzureDataLakeHistoryFolder",
 				"AzureDataLakeHistoryFolder, SqldbNycPayrollDataTable union(byName: true)~> unionHistoricalFilesSQL",
-				"unionHistoricalFilesSQL filter(ERROR_FUNCTION('')) ~> filter1"
+				"unionHistoricalFilesSQL filter(toInteger(FiscalYear) >= $Fiscal_Year) ~> filter1"
 			]
 		}
 	}
