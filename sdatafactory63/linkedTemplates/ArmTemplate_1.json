@@ -808,6 +808,59 @@
 				"[concat(variables('factoryId'), '/dataflows/load_Title_file_into_Synapse')]",
 				"[concat(variables('factoryId'), '/dataflows/load_Agency_file_into_Synapse')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline_Aggregate_data_flow')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Aggregate_data_flow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow_Aggregate_Data",
+								"type": "DataFlowReference",
+								"parameters": {
+									"Fiscal_Year": {
+										"value": "@pipeline().globalParameters.Global_FiscalYear",
+										"type": "Expression"
+									}
+								},
+								"datasetParameters": {
+									"SqldbNycPayrollDataTable": {},
+									"AzureDataLakeHistoryFolder": {},
+									"SQLPayrollSummaryTable": {}
+								},
+								"linkedServiceParameters": {}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Dataflow_Aggregate_Data')]"
+			]
 		}
 	]
 }
