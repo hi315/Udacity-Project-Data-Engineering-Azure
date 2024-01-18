@@ -29,6 +29,9 @@
 				},
 				{
 					"name": "AddTotalPaidColumn"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -86,7 +89,9 @@
 				"     ignoreNoFilesFound: false) ~> AzureDataLakeHistoryFolder",
 				"AzureDataLakeHistoryFolder, SqldbNycPayrollDataTable union(byName: true)~> unionHistoricalFilesSQL",
 				"unionHistoricalFilesSQL filter(toInteger(FiscalYear) >= $Fiscal_Year) ~> filterFiscalYear",
-				"filterFiscalYear derive(TotalPaid = RegularGrossPaid + TotalOTPaid + TotalOtherPay) ~> AddTotalPaidColumn"
+				"filterFiscalYear derive(TotalPaid = RegularGrossPaid + TotalOTPaid + TotalOtherPay) ~> AddTotalPaidColumn",
+				"AddTotalPaidColumn aggregate(groupBy(AgencyName,",
+				"          FiscalYear)) ~> aggregate1"
 			]
 		}
 	}
