@@ -686,7 +686,11 @@
 								"referenceName": "dataset_NYC_Payroll_AGENCY_MD",
 								"type": "DatasetReference"
 							},
-							"name": "agencySynapse"
+							"name": "agencySynapse",
+							"rejectedDataLinkedService": {
+								"referenceName": "linked_service_AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [],
@@ -709,13 +713,18 @@
 						"     allowCopyCommand: true,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> agencySynapse"
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          AgencyID,",
+						"          AgencyName",
+						"     )) ~> agencySynapse"
 					]
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/dataset_AgencyMaster')]",
-				"[concat(variables('factoryId'), '/datasets/dataset_NYC_Payroll_AGENCY_MD')]"
+				"[concat(variables('factoryId'), '/datasets/dataset_NYC_Payroll_AGENCY_MD')]",
+				"[concat(variables('factoryId'), '/linkedServices/linked_service_AzureDataLakeStorage1')]"
 			]
 		},
 		{
