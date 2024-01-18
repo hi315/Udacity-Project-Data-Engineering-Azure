@@ -460,7 +460,7 @@
 						"filterFiscalYear derive(TotalPaid = RegularGrossPaid + TotalOTPaid + TotalOtherPay) ~> AddTotalPaidColumn",
 						"AddTotalPaidColumn aggregate(groupBy(AgencyName,",
 						"          FiscalYear),",
-						"     AvgBaseSalary = avg(toInteger(BaseSalary))) ~> aggregate1",
+						"     SumTotalPaid = sum(toInteger(TotalPaid))) ~> aggregate1",
 						"aggregate1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
@@ -479,7 +479,8 @@
 						"     errorHandlingOption: 'stopOnFirstError',",
 						"     mapColumn(",
 						"          FiscalYear,",
-						"          AgencyName",
+						"          AgencyName,",
+						"          TotalPaid = SumTotalPaid",
 						"     )) ~> SQLPayrollSummaryTable"
 					]
 				}
