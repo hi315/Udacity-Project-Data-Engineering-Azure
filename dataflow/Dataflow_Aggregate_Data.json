@@ -23,9 +23,15 @@
 			"transformations": [
 				{
 					"name": "unionHistoricalFilesSQL"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     Fiscal_Year as string",
+				"}",
 				"source(output(",
 				"          FiscalYear as string,",
 				"          PayrollNumber as string,",
@@ -75,7 +81,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> AzureDataLakeHistoryFolder",
-				"AzureDataLakeHistoryFolder, SqldbNycPayrollDataTable union(byName: true)~> unionHistoricalFilesSQL"
+				"AzureDataLakeHistoryFolder, SqldbNycPayrollDataTable union(byName: true)~> unionHistoricalFilesSQL",
+				"unionHistoricalFilesSQL filter(ERROR_FUNCTION('')) ~> filter1"
 			]
 		}
 	}
