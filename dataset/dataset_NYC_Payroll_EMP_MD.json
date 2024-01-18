@@ -1,5 +1,5 @@
 {
-	"name": "dataset_AzureSynapseAnalyticsTable1",
+	"name": "dataset_NYC_Payroll_EMP_MD",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "linked_service_AzureSynapseAnalytics1",
@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "NYC_Payroll_AGENCY_MD"
+			"table": "NYC_Payroll_EMP_MD"
 		}
 	}
 }
