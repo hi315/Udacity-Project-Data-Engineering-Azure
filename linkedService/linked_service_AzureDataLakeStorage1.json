@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://adlsnycpayrolldatalake.dfs.core.windows.net/",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDA0NTk4QjY3LTRCRjYtNEU5OS1CNzU3LUJGNDQzNTIxOEQ5M181NmE1ODJjZS03Yjc0LTQwODYtOTkzZS1hNzIzZWE0MjQyN2MiDQp9"
+			"url": "https://datalakestorage63.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEY4QzA4QzEyLTk0RjctNERDNy04RTI5LURBOEU3QUZBOThDRV85OTgxYjQ0NS1mMjU0LTRmMmItYTNhYi0wNDRhYzVlNzhmY2QiDQp9"
 		}
 	}
 }
