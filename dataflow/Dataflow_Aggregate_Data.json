@@ -19,7 +19,15 @@
 					"name": "AzureDataLakeHistoryFolder"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dataset_SQL_nycpayroll_summary",
+						"type": "DatasetReference"
+					},
+					"name": "SQLPayrollSummaryTable"
+				}
+			],
 			"transformations": [
 				{
 					"name": "unionHistoricalFilesSQL"
@@ -91,7 +99,26 @@
 				"unionHistoricalFilesSQL filter(toInteger(FiscalYear) >= $Fiscal_Year) ~> filterFiscalYear",
 				"filterFiscalYear derive(TotalPaid = RegularGrossPaid + TotalOTPaid + TotalOtherPay) ~> AddTotalPaidColumn",
 				"AddTotalPaidColumn aggregate(groupBy(AgencyName,",
-				"          FiscalYear)) ~> aggregate1"
+				"          FiscalYear)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          FiscalYear as integer,",
+				"          AgencyName as string,",
+				"          TotalPaid as double",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          FiscalYear,",
+				"          AgencyName",
+				"     )) ~> SQLPayrollSummaryTable"
 			]
 		}
 	}
