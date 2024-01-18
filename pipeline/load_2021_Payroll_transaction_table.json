@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "Pipeline load 2021 Payroll in SQL table",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
