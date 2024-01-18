@@ -100,7 +100,7 @@
 				"filterFiscalYear derive(TotalPaid = RegularGrossPaid + TotalOTPaid + TotalOtherPay) ~> AddTotalPaidColumn",
 				"AddTotalPaidColumn aggregate(groupBy(AgencyName,",
 				"          FiscalYear),",
-				"     AvgBaseSalary = avg(toInteger(BaseSalary))) ~> aggregate1",
+				"     AvgTotalPaid = avg(toInteger(TotalPaid))) ~> aggregate1",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
